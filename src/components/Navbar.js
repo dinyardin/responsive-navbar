@@ -16,11 +16,27 @@ function Navbar() {
     setClick(false);
   };
 
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(false);
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
         {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
           Dinyar
         </Link>
 
@@ -34,7 +50,11 @@ function Navbar() {
               Home
             </Link>
           </li>
-          <li className="nav-item">
+          <li
+            className="nav-item"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
             <Link
               to="/services"
               className="nav-links"
@@ -42,8 +62,8 @@ function Navbar() {
             >
               Services <i className="fas fa-caret-down" />
             </Link>
+            {dropdown && <Dropdown />}
           </li>
-          {dropdown && <Dropdown />}
           <li className="nav-item">
             <Link
               to="/contact-us"
